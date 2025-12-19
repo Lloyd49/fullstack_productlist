@@ -13,39 +13,83 @@
     <script type="text/javascript">
         var products = [
             {
-                name: "Apple",
-                price: 20,
+                name: "AZURA Ethereal Realm: Mythical Beasts Series",
+                price: 380.00,
                 description: "Fresh red apple",
-                image: "https://placehold.co/600x400/png"
+                image: "https://prod-thailand-res.popmart.com/default/20251209_095920_122042____4_____1200x1200.jpg",
+                catagory: "AZURE"
             },
             {
-                name: "Banana",
-                price: 60,
+                name: "AZURA Ethereal Realm: Mythical Beasts Series",
+                price: 380.00,
                 description: "Sweet yellow banana",
-                image: "https://placehold.co/600x400/png"
+                image: "https://prod-thailand-res.popmart.com/default/20251209_095920_032995____5_____1200x1200.jpg",
+                catagory: "AZURE"
             },
             {
-                name: "Mango",
-                price: 40,
+                name: "AZURA Ethereal Realm: Mythical Beasts Series",
+                price: 380.00,
                 description: "Juicy tropical mango",
-                image: "https://placehold.co/600x400/png"
+                image: "https://prod-thailand-res.popmart.com/default/20251209_095920_473123____6_____1200x1200.jpg",
+                catagory: "AZURE"
             },
             {
-                name: "Coconut",
-                price: 50,
+                name: "AZURA Ethereal Realm: Mythical Beasts Series",
+                price: 380.00,
                 description: "Refreshing coconut drink",
-                image: "https://placehold.co/600x400/png"
-            }
+                image: "https://prod-thailand-res.popmart.com/default/20251209_095920_695283____2_____1200x1200.jpg",
+                catagory: "AZURE"
+            },
+            {
+                name: "Hirno: Knight",
+                price: 380.00,
+                description: "Juicy tropical mango",
+                image: "https://prod-eurasian-res.popmart.com/default/20250408_172633_361691____2_____1200x1200.jpg?x-oss-process=image/resize,p_30,format,webp,format,webp",
+                catagory: "Hirono"
+            },
+            {
+                name: "Hirono: Pieces of memory",
+                price: 380.00,
+                description: "Juicy tropical mango",
+                image: "https://prod-eurasian-res.popmart.com/default/20250408_172633_732450____3_____1200x1200.jpg",
+                catagory: "Hirono"
+            },
+            {
+                name: "Hirono: Never Going Up",
+                price: 380.00,
+                description: "Juicy tropical mango",
+                image: "https://prod-eurasian-res.popmart.com/default/20250408_172633_027111____7_____1200x1200.jpg",
+                catagory: "Hirono"
+            },
+            {
+                name: "Hirono: Journy in the rain",
+                price: 380.00,
+                description: "Juicy tropical mango",
+                image: "https://prod-eurasian-res.popmart.com/default/20250408_172633_005471____5_____1200x1200.jpg",
+                catagory: "Hirono"
+            },
+            {
+                name: "Hirono: Back off",
+                price: 380.00,
+                description: "Juicy tropical mango",
+                image: "https://prod-eurasian-res.popmart.com/default/20250408_172633_095533____4_____1200x1200.jpg",
+                catagory: "Hirono"
+            },
         ];
 
-        function addToCart() {
-            var myModal = new boostrap.Modal(document.getElementById('sample-modal'));
-            myModal.show();
+        function addToCart(){
+                var modalEl = document.getElementById("sample-modal");
+                var modal = new bootstrap.Modal(modalEl);
+                modal.show();
         }
 
         function searchProcduct() {
             var container = document.getElementById("product-list");
             container.innerHTML = "";
+
+            var Catagory = document.getElementById("Catagory");
+                console.log(Catagory.value);
+
             var input = document.getElementById("input-keyword");
             var keyword = input.value;
             var filterdProducts = [];
@@ -53,7 +97,12 @@
                 var product = products[i];
 
                 if(product.name.toLowerCase().indexOf(keyword.toLowerCase()) > -1) {
-                    filterdProducts.push(product);
+                    if(product.catagory.toLowerCase() == Catagory.value.toLowerCase()) {
+                        filterdProducts.push(product);
+                    }
+                    if(Catagory.value == "All") {
+                        filterdProducts.push(product);
+                    }
                 }
             }
 
@@ -67,26 +116,28 @@
             for (var i = 0; i < filterdProducts.length; i++) {
                 var product = filterdProducts[i];
                 var itemTemplate = `
-                    <div class="col-xs-12 col-md-4 col-lg-12 p-3">
-                        <div class="card shadow-sm">
-                            <div class="row">
-                                <div class="col-md-12 col-lg-4">
-                                    <img src="${product.image}" class="card-img-top" />
+                    <div class="row col-6 col-lg-2">
+                        <div class="col-xs col-md-12 col-lg-12 p-2">
+                            <div class="card shadow-sm">
+                                <div class="col-md-12 col-lg-12">
+                                    <img src="${product.image}" class="card-img-top" alt="">
                                 </div>
-                                <div class="col-md-12 col-lg-8">
+                                <div class="col-md-12 col-lg-12">
                                     <div class="card-body">
-                                        <h5 class="card-title">${product.name}</h5>
-                                        <p class="card-text text-muted">
+                                        <h5 class="card-title text-center">${product.name}</h5>
+                                        <p class="card-text">
                                             ${product.description}
                                         </p>
-                                        <h6 class="text-success">THB ${product.price}</h6>
-                                        <a href="#" class="btn btn-dark">Add to cart</a>
+                                        <p class="card-text text-muted">
+                                           <span>Catagory:</span> ${product.catagory}
+                                        </p>
+                                        <h6 class="text-success">${product.price} THB</h6>
+                                        <a href="#" class="btn btn-danger" onclick="addToCart()">Add to Cart</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                `;
+                    </div> `;
                 container.innerHTML = container.innerHTML + itemTemplate;
             };
         }
@@ -97,26 +148,28 @@
             for (var i = 0; i < products.length; i++) {
                 var product = products[i];
                 var itemTemplate = `
-                    <div class="col-xs-12 col-md-4 col-lg-12 p-3">
-                        <div class="card shadow-sm">
-                            <div class="row">
-                                <div class="col-md-12 col-lg-4">
-                                    <img src="${product.image}" class="card-img-top" />
+                    <div class="row col-6 col-lg-2">
+                        <div class="col-xs col-md-12 col-lg-12 p-2">
+                            <div class="card shadow-sm">
+                                <div class="col-md-12 col-lg-12">
+                                    <img src="${product.image}" class="card-img-top" alt="">
                                 </div>
-                                <div class="col-md-12 col-lg-8">
+                                <div class="col-md-12 col-lg-12">
                                     <div class="card-body">
-                                        <h5 class="card-title">${product.name}</h5>
-                                        <p class="card-text text-muted">
+                                        <h5 class="card-title text-center">${product.name}</h5>
+                                        <p class="card-text">
                                             ${product.description}
                                         </p>
-                                        <h6 class="text-success">THB ${product.price}</h6>
-                                        <a href="#" class="btn btn-dark" onclick="">Add to cart</a>
+                                        <p class="card-text text-muted">
+                                           <span>Catagory:</span> ${product.catagory}
+                                        </p>
+                                        <h6 class="text-success">${product.price} THB</h6>
+                                        <a href="#" class="btn btn-danger" onclick="addToCart()">Add to Cart</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                `;
+                    </div> `;
                 container.innerHTML += itemTemplate;
             };  
         });
@@ -132,6 +185,13 @@
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" id="input-keyword" placeholder="Search for ...">
                     <button class="btn btn-primary" type="button" onclick="searchProcduct()" id="button-search">Search</button>
+                    <div class="dropdown">
+                        <select id="Catagory" class="form-select" onchange="searchProcduct()">
+                            <option value="All">Select Catagory</option>
+                            <option value="AZURE">AZURE</option>
+                            <option value="Hirono">Hirono</option>
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
@@ -158,7 +218,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    Are you sure to dp this item?
+                    Are you sure to buy this item?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -168,7 +228,7 @@
         </div>
     </div>
 
-    <div class="container">
+    <!-- <div class="container">
         <div class="row">
             <div class="col-xs-12 col-md-4 col-lg-12 p-3">
                 <div class="card shadow-sm">
@@ -229,7 +289,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </body>
 
 </html>
